@@ -4,12 +4,20 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <time.h>
-
+#include <string.h>
+#include <errno.h>
 
 void printInfo(char *s){
-  struct stat * fileinfo = (struct stat*) malloc (sizeof(struct stat));
-  stat(s, fileinfo);
   printf("file: %s\n", s);
+
+  struct stat * fileinfo = (struct stat*) malloc (sizeof(struct stat));
+  int status = stat(s, fileinfo);
+
+  if (status < 0){ //failed to get stats
+    printf("error: %s\n", strerror(errno));
+    return;
+  }
+
   //l for long
   printf("size: %ld bytes\n", fileinfo -> st_size);
   // %o == octal
