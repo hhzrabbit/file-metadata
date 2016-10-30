@@ -12,9 +12,9 @@ void printInfo(char *s){
   printf("file: %s\n", s);
   //l for long
   printf("size: %ld bytes\n", fileinfo -> st_size);
-  // \o == octal
+  // %o == octal
   printf("mode (permissions): %o\n", fileinfo -> st_mode); 
-  //ctime takes pointer to time_t var
+  //ctime takes pointer to time_t
   printf("time of last access: %s\n", ctime( & (fileinfo -> st_atime) ) );
 }
 
